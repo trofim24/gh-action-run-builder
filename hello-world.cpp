@@ -6,7 +6,7 @@ using namespace NSDoctRenderer;
 int main(int argc, char *argv[])
 {
     // Specify the path to the Document Builder work directory and the result path (where the generated file will be saved)
-    std::wstring sWorkDirectory = NSUtils::GetBuilderDirectory();
+    std::wstring sWorkDirectory = L"builder/opt/onlyoffice/documentbuilder";
 
     // Init DocBuilder
     CDocBuilder::Initialize(sWorkDirectory.c_str());
