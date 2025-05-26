@@ -1,12 +1,10 @@
 #include "common.h"
 #include "docbuilder.h"
-#include "./utils.cpp"
 
 using namespace NSDoctRenderer;
 
 int main(int argc, char *argv[])
 {
-    std::wstring sProcessDirectory = NSUtils::GetProcessDirectory();
     // Specify the path to the Document Builder work directory and the result path (where the generated file will be saved)
     std::wstring sWorkDirectory = NSUtils::GetBuilderDirectory();
 
@@ -32,7 +30,7 @@ int main(int argc, char *argv[])
     oDocument.Call("InsertContent", oContent);
 
     // Save and close
-    std::wstring sDstPath = sProcessDirectory + L"/result.docx";
+    std::wstring sDstPath = L"result.docx";
     oBuilder.SaveFile("docx", sDstPath.c_str());
     oBuilder.CloseFile();
 
