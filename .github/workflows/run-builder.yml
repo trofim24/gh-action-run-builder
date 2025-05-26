@@ -25,7 +25,7 @@ jobs:
           mkdir -p builder
           tar xvJf "$FILE_NAME" -C builder
 
-      - name: Compile with Document Builder
+      - name: Compile with Document Builder and run
         run: |
           g++ hello-world.cpp \
             -Ibuilder/opt/onlyoffice/documentbuilder/include \
@@ -36,6 +36,7 @@ jobs:
             -lstdc++ -lpthread -lm -lc \
             -Wl,-rpath=builder/opt/onlyoffice/documentbuilder \
             -o hello-world
+          ./hello-world
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
