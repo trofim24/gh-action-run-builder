@@ -24,6 +24,9 @@ jobs:
 
           # Now try to install xz
           yum install -y xz
+
+          # Install g++
+          yum install -y gcc-c++
           
       - name: Install Document Builder
         run: |
