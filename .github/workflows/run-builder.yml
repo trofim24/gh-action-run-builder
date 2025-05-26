@@ -15,7 +15,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          sudo yum install xz
+          yum install xz
           
       - name: Install Document Builder
         run: |
