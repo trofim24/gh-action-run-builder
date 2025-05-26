@@ -27,6 +27,9 @@ jobs:
 
           # Install g++
           yum install -y gcc-c++
+
+          # This might help with C++ compatibility issues, but not your current problem
+          yum install -y libstdc++-devel
           
       - name: Install Document Builder
         run: |
