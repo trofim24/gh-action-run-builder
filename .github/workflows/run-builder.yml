@@ -15,6 +15,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          sudo yum update -y
           sudo yum install -y curl xz-utils build-essential
           
       - name: Install Document Builder
