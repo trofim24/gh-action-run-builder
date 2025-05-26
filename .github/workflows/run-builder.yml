@@ -15,6 +15,14 @@ jobs:
 
       - name: Install dependencies
         run: |
+          # Replace the repository URLs with vault URLs
+          sed -i 's|^mirrorlist=http://mirrorlist.centos.org|#mirrorlist=http://mirrorlist.centos.org|g' /etc/yum.repos.d/CentOS-Base.repo
+          sed -i 's|^#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-Base.repo
+
+          # Clean yum cache
+          yum clean all
+
+          # Now try to install xz
           yum install xz
           
       - name: Install Document Builder
