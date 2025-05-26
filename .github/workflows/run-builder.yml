@@ -13,6 +13,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Install dependencies
+        run: |
+          apt-get update
+          apt-get install -y curl xz-utils
+
       - name: Install Document Builder
         run: |
           ARCH=$(uname -m)
