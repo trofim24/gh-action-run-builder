@@ -29,11 +29,10 @@ jobs:
         run: |
           g++ hello-world.cpp \
             -Ibuilder/opt/onlyoffice/documentbuilder/include \
-            -Lbuilder/opt/onlyoffice/documentbuilder \
+            -Lbuilder/opt/onlyoffice/documentbuilder/libdocbuilder.c.so \
             -ldocbuilder \
             -lstdc++ -lpthread -lm -lc \
             -Wl,-rpath='builder/opt/onlyoffice/documentbuilder' \
-            -Wl,-rpath='$ORIGIN' \
             -o hello-world
 
 
