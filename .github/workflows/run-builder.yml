@@ -31,11 +31,9 @@ jobs:
             -Ibuilder/opt/onlyoffice/documentbuilder/include \
             -Lbuilder/opt/onlyoffice/documentbuilder \
             -ldocbuilder \
-            -lstdc++ \
-            -lpthread \
-            -lm \
-            -lc \
-            -Wl,-rpath,builder/opt/onlyoffice/documentbuilder \
-            -Wl,-rpath,'$ORIGIN' \
+            -lstdc++ -lpthread -lm -lc \
+            -Wl,-rpath='builder/opt/onlyoffice/documentbuilder' \
+            -Wl,-rpath='$ORIGIN' \
             -o hello-world
+
 
