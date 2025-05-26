@@ -23,7 +23,7 @@ jobs:
           yum clean all
 
           # Now try to install xz
-          yum install xz
+          yum install -y xz
           
       - name: Install Document Builder
         run: |
