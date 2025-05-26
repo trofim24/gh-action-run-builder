@@ -12,6 +12,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v1
+
+      - name: Install dependencies
+        run: |
+          sudo yum install xz
           
       - name: Install Document Builder
         run: |
