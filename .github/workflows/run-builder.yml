@@ -1,0 +1,13 @@
+name: Run Document Builder
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-docbuilder:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run builder
+        run: |
+          g++ hello-world.cpp -I../include -L../Lib -libdocbuilder -lstdc++ -lpthread -lm -lc -Wl,-rpath,../../../Lib -Wl,-rpath$ORIGIN -o hello-world
