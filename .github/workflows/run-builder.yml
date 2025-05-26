@@ -12,11 +12,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v1
-
-      - name: Install dependencies
-        run: |
-          sudo yum update -y
-          sudo yum install -y curl xz-utils build-essential
           
       - name: Install Document Builder
         run: |
