@@ -1,7 +1,7 @@
+#include <string>
 #include "common.h"
 #include "docbuilder.h"
 
-using namespace std;
 using namespace NSDoctRenderer;
 
 int main(int argc, char *argv[])
