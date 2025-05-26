@@ -6,6 +6,8 @@ on:
 jobs:
   build-docbuilder:
     runs-on: ubuntu-latest
+    container:
+      image: debian:12.0  # Debian 12 official image
 
     steps:
       - name: Checkout repository
