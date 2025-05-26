@@ -31,6 +31,8 @@ jobs:
             -Ibuilder/opt/onlyoffice/documentbuilder/include \
             -Lbuilder/opt/onlyoffice/documentbuilder \
             -ldocbuilder.c \
+            -lDocxRenderer \
+            -ldoctrenderer \
             -lstdc++ -lpthread -lm -lc \
             -Wl,-rpath=builder/opt/onlyoffice/documentbuilder \
             -o hello-world
