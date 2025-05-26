@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
     CDocBuilder oBuilder;
     oBuilder.SetProperty("--work-directory", sWorkDirectory.c_str());
 
-    oBuilder.CreateFile("docx");
+    oBuilder.CreateFile(OFFICESTUDIO_FILE_DOCUMENT_DOCX);
 
     CContext oContext = oBuilder.GetContext();
     CContextScope oScope = oContext.CreateScope();
@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
 
     // Save and close
     std::wstring sDstPath = L"result.docx";
-    oBuilder.SaveFile("docx", sDstPath.c_str());
+    oBuilder.SaveFile(OFFICESTUDIO_FILE_DOCUMENT_DOCX, sDstPath.c_str());
     oBuilder.CloseFile();
 
     CDocBuilder::Dispose();
