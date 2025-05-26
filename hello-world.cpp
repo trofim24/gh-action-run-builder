@@ -1,4 +1,4 @@
-#include "./../common.h"
+#include "../common.h"
 #include "../docbuilder.h"
 #include "./utils.cpp"
 
