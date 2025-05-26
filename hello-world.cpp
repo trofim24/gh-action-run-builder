@@ -1,5 +1,5 @@
-#include "../common.h"
-#include "../docbuilder.h"
+#include "common.h"
+#include "docbuilder.h"
 #include "./utils.cpp"
 
 using namespace NSDoctRenderer;
