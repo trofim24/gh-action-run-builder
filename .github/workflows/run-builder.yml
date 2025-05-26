@@ -21,8 +21,21 @@ jobs:
           fi
       
           curl -L -o "$FILE_NAME" "https://github.com/ONLYOFFICE/DocumentBuilder/releases/latest/download/$FILE_NAME"
-          tar xvJf "$FILE_NAME"
+          
+          mkdir -p builder
+          tar xvJf "$FILE_NAME" -C builder
 
-      - name: Run builder
+      - name: Compile with Document Builder
         run: |
-          g++ hello-world.cpp -I../include -L../Lib -libdocbuilder -lstdc++ -lpthread -lm -lc -Wl,-rpath,../../../Lib -Wl,-rpath$ORIGIN -o hello-world
+          g++ hello-world.cpp \
+            -Ibuilder/opt/onlyoffice/documentbuilder/include \
+            -Lbuilder/opt/onlyoffice/documentbuilder \
+            -ldocbuilder \
+            -lstdc++ \
+            -lpthread \
+            -lm \
+            -lc \
+            -Wl,-rpath,builder/opt/onlyoffice/documentbuilder \
+            -Wl,-rpath,'$ORIGIN' \
+            -o hello-world
+
