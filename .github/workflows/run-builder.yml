@@ -10,6 +10,18 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Install Document Builder
+        run: |
+          ARCH=$(uname -m)
+          if [[ "$ARCH" == "aarch64" || "$ARCH" == "arm64" ]]; then
+            FILE_NAME="aarch64"
+          else
+            FILE_NAME="x86_64"
+          fi
+      
+          curl -L -o "$FILE_NAME" "https://github.com/ONLYOFFICE/DocumentBuilder/releases/latest/download/onlyoffice-documentbuilder-linux-$FILE_NAME.tar.xz"
+
           
       - name: Run builder
         run: |
