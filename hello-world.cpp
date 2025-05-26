@@ -2,17 +2,17 @@
 #include "common.h"
 #include "docbuilder.h"
 
+// Specify the path to the Document Builder work directory and the result path (where the generated file will be saved)
+#define WORK_DIRECTORY L"builder/opt/onlyoffice/documentbuilder"
+
 using namespace NSDoctRenderer;
 
 int main(int argc, char *argv[])
 {
-    // Specify the path to the Document Builder work directory and the result path (where the generated file will be saved)
-    std::wstring sWorkDirectory = L"builder/opt/onlyoffice/documentbuilder";
-
     // Init DocBuilder
-    CDocBuilder::Initialize(sWorkDirectory.c_str());
+    CDocBuilder::Initialize(WORK_DIRECTORY);
     CDocBuilder oBuilder;
-    oBuilder.SetProperty("--work-directory", sWorkDirectory.c_str());
+    oBuilder.SetProperty("--work-directory", WORK_DIRECTORY);
 
     oBuilder.CreateFile(OFFICESTUDIO_FILE_DOCUMENT_DOCX);
 
