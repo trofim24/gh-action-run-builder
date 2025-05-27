@@ -24,12 +24,7 @@ jobs:
           
           :: Extract the archive
           powershell -command "Expand-Archive -Path 'documentbuilder.zip' -DestinationPath '.' -Force"
-          
-          :: Run DocumentBuilder with your script
-          cd %FOLDER%
-          DocumentBuilder.exe -document example.docbuilder -output result.docx
-
-
+      
       - name: Set up MSVC
         uses: ilammy/msvc-dev-cmd@v1
 
