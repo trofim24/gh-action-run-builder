@@ -39,9 +39,15 @@ jobs:
       - name: Set up MSVC
         uses: ilammy/msvc-dev-cmd@v1
 
-      - name: Build hello-world.exe
+      - name: Build hello-world.exe and run
         run: |
           cl hello-world.cpp /Ibuilder/include builder\doctrenderer.lib /Fe:hello-world.exe
+          
+          # copy dlls
+          copy builder\doctrenderer.dll hello-world.exe
+
+          # run
+          .\hello-world.exe
 
       - name: Copy DLL to exe folder
         run: copy builder\doctrenderer.dll hello-world.exe
