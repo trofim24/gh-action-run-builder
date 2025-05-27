@@ -35,12 +35,12 @@ jobs:
           g++ hello-world.cpp \
             -Ibuilder/include \
             -Lbuilder \
-            -llibdocbuilder.c.dylib \
-            -llibDocxRenderer \
-            -llibdoctrenderer \
-            -lstdc++ -lpthread \
-            -Wl,-rpath,builder \
-            -o hello-world
+            -ldocbuilder.c \
+            -lDocxRenderer \
+            -ldoctrenderer \
+            -lpthread \
+            -o hello-world \
+            -Wl,-rpath,@loader_path
           ./hello-world
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
