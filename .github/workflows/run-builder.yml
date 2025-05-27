@@ -48,12 +48,6 @@ jobs:
 
           # run
           .\hello-world.exe
-
-      - name: Copy DLL to exe folder
-        run: copy builder\doctrenderer.dll hello-world.exe
-
-      - name: Run the program
-        run: hello-world.exe
           
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
