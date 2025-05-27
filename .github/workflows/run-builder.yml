@@ -44,7 +44,7 @@ jobs:
           cl hello-world.cpp /Ibuilder/include builder\doctrenderer.lib /Fe:hello-world.exe
           
           # copy dlls
-          copy builder\doctrenderer.dll hello-world.exe
+          copy builder\doctrenderer.dll .
 
           # run
           .\hello-world.exe
