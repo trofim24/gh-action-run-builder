@@ -19,21 +19,17 @@ jobs:
             tar
             xz
             curl
+            unzip
             
       - name: Install Document Builder
-        shell: msys2 {0}
         run: |
-          ARCH=$(uname -m)
-          if [[ "$ARCH" == "x86_64" ]]; then
-            FILE_NAME="onlyoffice-documentbuilder-win-x64.zip"
-          else
-            FILE_NAME="onlyoffice-documentbuilder-win-x86.zip"
-          fi
-          echo "Using file: $FILE_NAME"
+          $ARCH = if ([Environment]::Is64BitOperatingSystem) { "x64" } else { "x86" }
+          $FILE_NAME = "onlyoffice-documentbuilder-win-$ARCH.zip"
+          Write-Host "Using file: $FILE_NAME"
           curl -L -o "$FILE_NAME" "https://github.com/ONLYOFFICE/DocumentBuilder/releases/latest/download/$FILE_NAME"
           
-          mkdir -p builder
-          unzip "$FILE_NAME" -d builder
+          New-Item -ItemType Directory -Force -Path "builder"
+          Expand-Archive -Path "$FILE_NAME" -DestinationPath "builder" -Force
           
       - name: Compile with Document Builder and run
         shell: msys2 {0}
