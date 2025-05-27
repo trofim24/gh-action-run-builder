@@ -3,7 +3,7 @@
 #include "docbuilder.h"
 
 // Specify the path to the Document Builder work directory and the result path (where the generated file will be saved)
-#define WORK_DIRECTORY L"builder/opt/onlyoffice/documentbuilder"
+#define WORK_DIRECTORY L"builder"
 
 using namespace NSDoctRenderer;
 
