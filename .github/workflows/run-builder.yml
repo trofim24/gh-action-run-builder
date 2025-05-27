@@ -19,7 +19,7 @@ jobs:
         run: |
           ARCH=$(uname -m)
           if [[ "$ARCH" == "arm64" ]]; then
-            FILE_NAME="onlyoffice-documentbuilder-macos-aarch64.tar.xz"
+            FILE_NAME="onlyoffice-documentbuilder-macos-arm64.tar.xz"
           else
             FILE_NAME="onlyoffice-documentbuilder-macos-x86_64.tar.xz"
           fi
