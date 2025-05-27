@@ -43,6 +43,7 @@ jobs:
             -Wl,-rpath,@executable_path/builder \
             -Wl,-rpath,@loader_path/builder
 
+          export DYLD_LIBRARY_PATH=builder:$DYLD_LIBRARY_PATH
           ./hello-world
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
