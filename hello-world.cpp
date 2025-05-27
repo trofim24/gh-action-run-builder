@@ -1,5 +1,6 @@
 #include <string>
 #include "common.h"
+#include "docbuilder_midl.h"
 #include "docbuilder.h"
 
 // Specify the path to the Document Builder work directory and the result path (where the generated file will be saved)
