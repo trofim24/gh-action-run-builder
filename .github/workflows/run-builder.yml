@@ -43,11 +43,11 @@ jobs:
         run: |
           cl hello-world.cpp /Ibuilder/include builder\doctrenderer.lib /Fe:hello-world.exe
           
-          # move EXE to builder folder
-          move hello-world.exe builder\hello-world.exe
+          # copy dlls
+          copy builder\DocxRenderer.dll .
+          copy builder\doctrenderer.dll .
 
-          # run from builder folder (where the DLL already exists)
-          cd builder
+          # run
           .\hello-world.exe
           
       - name: Upload artifacts
