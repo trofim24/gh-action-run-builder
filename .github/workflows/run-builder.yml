@@ -1,50 +1,33 @@
 name: Run Document Builder
-
 on:
   workflow_dispatch:
-
 jobs:
   build-docbuilder:
-    runs-on: ubuntu-latest
-    container:
-      image: centos:centos6
-
+    runs-on: macos-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v1
-
+        uses: actions/checkout@v4
       - name: Install dependencies
         run: |
-          # Replace the repository URLs with vault URLs
-          sed -i 's|^mirrorlist=http://mirrorlist.centos.org|#mirrorlist=http://mirrorlist.centos.org|g' /etc/yum.repos.d/CentOS-Base.repo
-          sed -i 's|^#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-Base.repo
-
-          # Clean yum cache
-          yum clean all
-
-          # Now try to install xz
-          yum install -y xz
-
-          # Install g++
-          yum install -y gcc-c++
-
-          # This might help with C++ compatibility issues, but not your current problem
-          yum install -y libstdc++-devel
+          # Install xz using Homebrew
+          brew install xz
+          # gcc/g++ should already be available via Xcode Command Line Tools
+          # but we can ensure they're available
+          xcode-select --install || true
           
       - name: Install Document Builder
         run: |
           ARCH=$(uname -m)
-          if [[ "$ARCH" == "aarch64" || "$ARCH" == "arm64" ]]; then
-            FILE_NAME="onlyoffice-documentbuilder-linux-aarch64.tar.xz"
+          if [[ "$ARCH" == "arm64" ]]; then
+            FILE_NAME="onlyoffice-documentbuilder-macos-aarch64.tar.xz"
           else
-            FILE_NAME="onlyoffice-documentbuilder-linux-x86_64.tar.xz"
+            FILE_NAME="onlyoffice-documentbuilder-macos-x86_64.tar.xz"
           fi
       
           curl -L -o "$FILE_NAME" "https://github.com/ONLYOFFICE/DocumentBuilder/releases/latest/download/$FILE_NAME"
           
           mkdir -p builder
           tar xvJf "$FILE_NAME" -C builder
-
       - name: Compile with Document Builder and run
         run: |
           g++ hello-world.cpp \
@@ -53,11 +36,10 @@ jobs:
             -ldocbuilder.c \
             -lDocxRenderer \
             -ldoctrenderer \
-            -lstdc++ -lpthread -lm -lc \
-            -Wl,-rpath=builder/opt/onlyoffice/documentbuilder \
+            -lstdc++ -lpthread \
+            -Wl,-rpath,builder/opt/onlyoffice/documentbuilder \
             -o hello-world
           ./hello-world
-
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
