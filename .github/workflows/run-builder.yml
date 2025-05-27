@@ -35,23 +35,11 @@ jobs:
           
           mkdir -p builder
           unzip "$FILE_NAME" -d builder
-          
-      - name: Compile with Document Builder and run
-        shell: msys2 {0}
+
+      - name: Build with MSVC and run
         run: |
-          # List the contents to understand the structure
-          ls -la builder/
-          
-          # Compile the C++ program
-          g++ hello-world.cpp \
-            -Ibuilder/include \
-            -Lbuilder \
-            -lDocxRenderer \
-            -ldoctrenderer \
-            -o hello-world.exe
-            
-          # Set PATH to include the builder directory for DLLs
-          export PATH="$(pwd)/builder:$PATH"
+          cl hello-world.cpp /Ibuilder/include builder/libdocbuilder.lib /Fe:hello-world.exe
+
           ./hello-world.exe
           
       - name: Upload artifacts
