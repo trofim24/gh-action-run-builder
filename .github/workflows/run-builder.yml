@@ -24,7 +24,8 @@ jobs:
             FILE_NAME="onlyoffice-documentbuilder-macos-x86_64.tar.xz"
           fi
 
-          print ("$FILE_NAME")
+          echo "Using file: $FILE_NAME"
+
           curl -L -o "$FILE_NAME" "https://github.com/ONLYOFFICE/DocumentBuilder/releases/latest/download/$FILE_NAME"
           
           mkdir -p builder
