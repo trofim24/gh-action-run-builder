@@ -45,7 +45,7 @@ jobs:
           # Compile the C++ program
           g++ hello-world.cpp \
             -Ibuilder/include \
-            -Lbuilder
+            -Lbuilder \
             -lDocxRenderer \
             -ldoctrenderer \
             -o hello-world.exe
