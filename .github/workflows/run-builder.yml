@@ -40,7 +40,7 @@ jobs:
             -ldoctrenderer \
             -lpthread \
             -o hello-world \
-            -Wl,-rpath,@loader_path
+            -Wl,-rpath,@executable_path/builder
           ./hello-world
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
