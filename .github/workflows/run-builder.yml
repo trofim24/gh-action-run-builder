@@ -3,48 +3,55 @@ on:
   workflow_dispatch:
 jobs:
   build-docbuilder:
-    runs-on: macos-13
+    runs-on: windows-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Install dependencies
-        run: |
-          # Install xz using Homebrew
-          brew install xz
-          # gcc/g++ should already be available via Xcode Command Line Tools
-          # but we can ensure they're available
-          xcode-select --install || true
-          
+      
+      - name: Setup MSYS2
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW64
+          update: true
+          install: >-
+            mingw-w64-x86_64-gcc
+            mingw-w64-x86_64-make
+            tar
+            xz
+            curl
+            
       - name: Install Document Builder
+        shell: msys2 {0}
         run: |
           ARCH=$(uname -m)
-          if [[ "$ARCH" == "arm64" ]]; then
-            FILE_NAME="onlyoffice-documentbuilder-macos-arm64.tar.xz"
+          if [[ "$ARCH" == "x86_64" ]]; then
+            FILE_NAME="onlyoffice-documentbuilder-win-x64.zip"
           else
-            FILE_NAME="onlyoffice-documentbuilder-macos-x86_64.tar.xz"
+            FILE_NAME="onlyoffice-documentbuilder-win-x86.zip"
           fi
-
           echo "Using file: $FILE_NAME"
-
           curl -L -o "$FILE_NAME" "https://github.com/ONLYOFFICE/DocumentBuilder/releases/latest/download/$FILE_NAME"
           
           mkdir -p builder
-          tar xvJf "$FILE_NAME" -C builder
+          unzip "$FILE_NAME" -d builder
+          
       - name: Compile with Document Builder and run
+        shell: msys2 {0}
         run: |
-          otool -L builder/libdocbuilder.c.dylib
+          # List the contents to understand the structure
+          ls -la builder/
+          
+          # Compile the C++ program
           g++ hello-world.cpp \
             -Ibuilder/include \
             -Lbuilder \
-            -lDocxRenderer \
-            -ldoctrenderer \
-            -lpthread \
-            -o hello-world \
-            -Wl,-rpath,@executable_path/builder \
-            -Wl,-rpath,@loader_path/builder
-
-          export DYLD_LIBRARY_PATH=builder:$DYLD_LIBRARY_PATH
-          ./hello-world
+            -ldocbuilder \
+            -o hello-world.exe
+            
+          # Set PATH to include the builder directory for DLLs
+          export PATH="$(pwd)/builder:$PATH"
+          ./hello-world.exe
+          
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
