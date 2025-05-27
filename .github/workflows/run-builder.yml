@@ -41,7 +41,6 @@ jobs:
             -lpthread \
             -o hello-world \
             -Wl,-rpath,@executable_path/builder
-          export DYLD_LIBRARY_PATH=builder:$DYLD_LIBRARY_PATH
           ./hello-world
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
