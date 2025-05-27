@@ -34,9 +34,6 @@ jobs:
       - name: Compile with Document Builder and run
         shell: msys2 {0}
         run: |
-          # List the contents to understand the structure
-          ls -la builder/
-          
           # Compile the C++ program
           g++ hello-world.cpp \
             -Ibuilder/include \
