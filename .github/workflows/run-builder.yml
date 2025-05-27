@@ -26,9 +26,9 @@ jobs:
         run: |
           ARCH=$(uname -m)
           if [[ "$ARCH" == "x86_64" ]]; then
-            FILE_NAME="onlyoffice-documentbuilder-win-x64.zip"
+            FILE_NAME="onlyoffice-documentbuilder-windows-x64.zip"
           else
-            FILE_NAME="onlyoffice-documentbuilder-win-x86.zip"
+            FILE_NAME="onlyoffice-documentbuilder-windows-x86.zip"
           fi
           echo "Using file: $FILE_NAME"
           curl -L -o "$FILE_NAME" "https://github.com/ONLYOFFICE/DocumentBuilder/releases/latest/download/$FILE_NAME"
