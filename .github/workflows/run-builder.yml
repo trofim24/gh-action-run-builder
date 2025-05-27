@@ -43,9 +43,8 @@ jobs:
         run: |
           cl hello-world.cpp /Ibuilder/include builder\doctrenderer.lib /Fe:hello-world.exe
           
-          # copy dlls
-          copy builder\DocxRenderer.dll .
-          copy builder\doctrenderer.dll .
+          # Add 'builder' subfolder to PATH (relative path)
+          $env:PATH = "$(Get-Location)\builder;$env:PATH"
 
           # run
           .\hello-world.exe
