@@ -41,10 +41,10 @@ jobs:
 
       - name: Build hello-world.exe
         run: |
-          cl hello-world.cpp /Ibuilder/include builder\libdocbuilder.lib /Fe:hello-world.exe
+          cl hello-world.cpp /Ibuilder/include builder\doctrenderer.lib /Fe:hello-world.exe
 
       - name: Copy DLL to exe folder
-        run: copy builder\libdocbuilder.dll hello-world.exe
+        run: copy builder\doctrenderer.dll hello-world.exe
 
       - name: Run the program
         run: hello-world.exe
