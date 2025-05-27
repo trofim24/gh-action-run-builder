@@ -45,6 +45,9 @@ jobs:
           # Compile the C++ program
           g++ hello-world.cpp \
             -Ibuilder/include \
+            -Lbuilder
+            -lDocxRenderer \
+            -ldoctrenderer \
             -o hello-world.exe
             
           # Set PATH to include the builder directory for DLLs
