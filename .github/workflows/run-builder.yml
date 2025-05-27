@@ -33,13 +33,13 @@ jobs:
       - name: Compile with Document Builder and run
         run: |
           g++ hello-world.cpp \
-            -Ibuilder/opt/onlyoffice/documentbuilder/include \
-            -Lbuilder/opt/onlyoffice/documentbuilder \
+            -Ibuilder/include \
+            -Lbuilder \
             -ldocbuilder.c \
             -lDocxRenderer \
             -ldoctrenderer \
             -lstdc++ -lpthread \
-            -Wl,-rpath,builder/opt/onlyoffice/documentbuilder \
+            -Wl,-rpath,builder \
             -o hello-world
           ./hello-world
       - name: Upload artifacts
