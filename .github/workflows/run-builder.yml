@@ -32,6 +32,7 @@ jobs:
           tar xvJf "$FILE_NAME" -C builder
       - name: Compile with Document Builder and run
         run: |
+          otool -L builder/libdocbuilder.c.dylib
           g++ hello-world.cpp \
             -Ibuilder/include \
             -Lbuilder \
