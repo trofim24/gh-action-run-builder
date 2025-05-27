@@ -35,7 +35,7 @@ jobs:
           g++ hello-world.cpp \
             -Ibuilder/include \
             -Lbuilder \
-            -llibdocbuilder.c \
+            -llibdocbuilder.c.dylib \
             -llibDocxRenderer \
             -llibdoctrenderer \
             -lstdc++ -lpthread \
